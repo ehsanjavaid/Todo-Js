@@ -56,6 +56,26 @@ function taskRender() {
         list.appendChild(checkBox)
         taskList.appendChild(list)
 
+        // Edit button
+
+        const editButton = document.createElement("button")
+        editButton.textContent = "Edit"
+        editButton.addEventListener("click", () => {
+            if (editButton.textContent === "Edit") {
+                const input = document.createElement("input")
+                input.type = "text"
+                input.value = task.text
+                li.replacechild(input, span)
+                editButton.textContent = "save"
+
+                editButton.onclick = () => {
+                    task.text = input.value.trim() || task.text
+                    taskRender()
+                }
+            }
+
+        })
+
     });
 }
 function deleteTask(index) {
