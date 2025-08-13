@@ -37,17 +37,14 @@ function taskRender() {
 
     filterTasks.forEach((task, index) => {
         const list = document.createElement("li")
-        list.textContent = task.text
+        const span = document.createElement("span");
+        span.textContent = task.text;
 
         if (task.completed) {
-            list.style.textDecoration = task.completed ? "line-through" : "none";
+            span.style.textDecoration = task.completed ? "line-through" : "none";
         }
-        // Delete Task
-        const deleteBtn = document.createElement("Button")
-        deleteBtn.innerText = "Delete"
-
-        deleteBtn.addEventListener("click", () => deleteTask(index));
-        list.appendChild(deleteBtn)
+        list.appendChild(span);
+        
         // Mark complete
         const checkBox = document.createElement("input");
         checkBox.type = "checkbox";
@@ -57,26 +54,44 @@ function taskRender() {
         taskList.appendChild(list)
 
         // Edit button
-
-        const editButton = document.createElement("button")
-        editButton.textContent = "Edit"
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
         editButton.addEventListener("click", () => {
-            if (editButton.textContent === "Edit") {
-                const input = document.createElement("input")
-                input.type = "text"
-                input.value = task.text
-                li.replacechild(input, span)
-                editButton.textContent = "save"
+            // Replace span with input
+            const input = document.createElement("input");
+            input.type = "text";
+            input.value = task.text;
 
-                editButton.onclick = () => {
-                    task.text = input.value.trim() || task.text
-                    taskRender()
-                }
-            }
+            list.replaceChild(input, span);
+            editButton.textContent = "Save";
 
-        })
+            editButton.onclick = () => {
+                task.text = input.value.trim() || task.text;
+                saveTask();
+                taskRender();
+            };
+        });
+        list.appendChild(editButton);
 
+        taskList.appendChild(list);
+        // Delete Task
+        const deleteBtn = document.createElement("Button")
+        deleteBtn.innerText = "Delete"
+
+        deleteBtn.addEventListener("click", () => deleteTask(index));
+        list.appendChild(deleteBtn)
     });
+
+    renderStats();
+}
+
+function renderStats() {
+    const stats = document.getElementById("stats");
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(task => task.completed).length;
+    const pendingTasks = totalTasks - completedTasks;
+    stats.textContent = `Total Tasks: ${totalTasks} | completed: ${completedTasks} |  pending: ${pendingTasks}`;
+
 }
 function deleteTask(index) {
     tasks = tasks.filter((_, i) => i !== index)

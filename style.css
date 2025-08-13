@@ -1,158 +1,117 @@
-/* ===== General Reset ===== */
+/* Reset some default styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f5f7fa;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding: 40px 20px;
-    color: #333;
+  background: linear-gradient(135deg, #74ebd5, #9face6);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  color: #333;
 }
 
 .container {
-    background: #fff;
-    border-radius: 12px;
-    padding: 25px 30px;
-    width: 800px;
-    max-width: 100%;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    animation: fadeIn 0.3s ease;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+  max-width: 450px;
+  width: 100%;
 }
 
-/* ===== Header ===== */
 h1 {
-    text-align: center;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #222;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4a4a4a;
 }
 
-/* ===== Form Styles ===== */
 form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 input[type="text"],
 input[type="search"] {
-    flex: 1;
-    padding: 10px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    transition: border-color 0.2s;
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease;
 }
 
-input:focus {
-    border-color: #4A90E2;
-    outline: none;
+input[type="text"]:focus,
+input[type="search"]:focus {
+  border-color: #6c63ff;
 }
 
 button {
-    background: #4A90E2;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background 0.3s ease;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #6c63ff;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 button:hover {
-    background: #357ABD;
+  background: #5548d8;
 }
 
-/* ===== Filter Buttons ===== */
-div > button[data-filter] {
-    margin: 5px 5px 20px 0;
+[data-filter] {
+  margin-top: 10px;
 }
 
-/* ===== Task List ===== */
-ul {
-    list-style: none;
-    padding: 0;
+#taskList {
+  list-style: none;
+  margin-top: 15px;
 }
 
-li {
-    background: #f9fafc;
-    border: 1px solid #e4e6eb;
-    border-radius: 6px;
-    padding: 10px 12px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: background 0.2s ease;
+#taskList li {
+  background: #f9f9f9;
+  padding: 10px 14px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  justify-content: space-between;
 }
 
-li:hover {
-    background: #f1f3f6;
+#taskList li span {
+  flex: 1;
 }
 
-li.completed .task-text {
-    text-decoration: line-through;
-    color: #888;
+#taskList li button {
+  padding: 6px 10px;
+  font-size: 0.85em;
+  background: #ff5c5c;
 }
 
-/* ===== Inside Each Task ===== */
-.task-content {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex: 1;
+#taskList li button:hover {
+  background: #e04646;
 }
 
-.task-text {
-    flex: 1;
-    font-size: 14px;
-    word-break: break-word;
+#taskList li input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
 }
 
-.task-actions {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-/* ===== Buttons and Checkbox ===== */
-.delete-btn {
-    background: #ff4d4d;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 5px 8px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: background 0.2s;
-}
-
-.delete-btn:hover {
-    background: #d93636;
-}
-
-input[type="checkbox"] {
-    transform: scale(1.2);
-    cursor: pointer;
-}
-
-/* ===== Animation ===== */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+#stats {
+  margin-top: 15px;
+  padding: 10px;
+  background: #f0f4ff;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+  color: #4a4a4a;
 }
