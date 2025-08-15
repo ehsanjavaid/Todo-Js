@@ -129,6 +129,25 @@ document.querySelectorAll("button[data-filter]").forEach((button) => {
         taskRender()
     })
 })
+// Dark Mode
+document.getElementById("dark-mode-btn").addEventListener("click", () =>{
+    document.body.classList.toggle("dark");
+    localStorage.setItem("darkMode", document.body.classList.contains("dark"));
+})
+// restore dark mode on page
+if (localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark");
+}
+// Fetch sample tasks
+document.getElementById("load-sample-btn").addEventListener("click", async () => {
+    const res = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=5");
+    const data = await res.json();
+    const fetchedTasks = data.map(t => ({ text: t.title, completed: t.completed }));
+    tasks = [...tasks, ...fetchedTasks];
+    saveTask();
+    taskRender();
+});
 
-
+// Initial render
+document.addEventListener("DOMContentLoaded", taskRender);
 
